@@ -5,3 +5,11 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+*.csproj
+*.sln
+*.slnx
+*.sln.xml
+*.unityproj
+.plastic/
+.vscode/
+ignore.conf
