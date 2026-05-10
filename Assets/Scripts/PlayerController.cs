@@ -8,13 +8,15 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 720f; // Saniyedeki dönme derecesi
 
     private Rigidbody rb;
+    private Animator animator;
     private Vector2 moveInput;
     private Vector3 moveDirection;
-
+    
     private void Awake()
     {
         // Fizik iþlemleri için Rigidbody'yi alýyoruz
         rb = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
 
         // Rigidbody'nin devrilmesini engellemek için rotasyonlarýný donduruyoruz
         // Sadece kod ile biz döndüreceðiz
@@ -29,9 +31,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // Input verisini 3D dünyaya (X ve Z eksenine) çeviriyoruz
-        // Üstten bakýþ olduðu için Y ekseni (yukarý) sabit kalýyor
-        moveDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+        if (moveInput ==Vector2.zero) {
+            animator.SetBool("SlowRun",false);
+        }
+        else
+        {
+            animator.SetBool("SlowRun",true);
+        }
+            // Input verisini 3D dünyaya (X ve Z eksenine) çeviriyoruz
+            // Üstten bakýþ olduðu için Y ekseni (yukarý) sabit kalýyor
+            moveDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
     }
 
     private void FixedUpdate()
