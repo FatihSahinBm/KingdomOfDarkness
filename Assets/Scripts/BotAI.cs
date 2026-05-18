@@ -10,13 +10,13 @@ public enum BotModu
 public class BotAI : MonoBehaviour
 {
     [Header("Takip Ayarları")]
-    public Transform player; 
-    public float durmaMesafesi = 4.0f; 
-    
+    public Transform player;
+    public float durmaMesafesi = 4.0f;
+
     // Askerlerin formasyona geçtikten sonra titremeyi bırakıp çakılı kalmaları için gereken süre
     public float formasyondaSabitlenmeSuresi = 2.5f;
 
-    private NavMeshAgent agent; 
+    private NavMeshAgent agent;
 
     [HideInInspector]
     public Vector3 formasyonPozisyonu;
@@ -33,7 +33,7 @@ public class BotAI : MonoBehaviour
         agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
 
         agent.acceleration = 100f;
-        agent.angularSpeed = 500f; 
+        agent.angularSpeed = 500f;
         agent.updateRotation = false;
     }
 
@@ -43,13 +43,13 @@ public class BotAI : MonoBehaviour
         {
             // Botların birbirine girmemesi için kişisel alan (Grid mesafesine sığması çok önemlidir!)
             // Eski değer olan 0.8, 1.2'lik grid'e sığmadığı için sürekli birbirlerini itip titretiyorlardı.
-            agent.radius = 0.5f; 
+            agent.radius = 0.5f;
 
             if (guncelMod == BotModu.GumburGumburTakip)
             {
                 formasyondakiSure = 0f; // Süreyi sıfırla
                 agent.isStopped = false; // Motoru tekrar aç ki hareket edebilsin
-                
+
                 // Hareket halindeyken dairesel, organik bir güruh halinde takip et
                 agent.stoppingDistance = durmaMesafesi;
                 agent.SetDestination(player.position);
@@ -70,7 +70,7 @@ public class BotAI : MonoBehaviour
                 {
                     agent.isStopped = false;
                     // Durduklarında, kendilerine atanan o özel matematiksel noktaya gitmeye çalışırlar
-                    agent.stoppingDistance = 0.2f; 
+                    agent.stoppingDistance = 0.2f;
                     Vector3 hedefNokta = player.TransformPoint(formasyonPozisyonu);
                     agent.SetDestination(hedefNokta);
                 }
