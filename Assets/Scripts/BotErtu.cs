@@ -17,7 +17,18 @@ public class BotErtu : MonoBehaviour
     // Botun þu an takip ettiði bir hedefin olup olmadýðýný tutar
     private Transform mevcutHedef;
     private NavMeshAgent agent; // YENÝ EKLEDÝK: Botun yürüyüþ motorunu tutacak deðiþken.
+    private Animator animator;
 
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+
+        if (animator == null)
+        {
+            Debug.LogError("Animator bulunamadý!");
+        }
+    }
     void Start()
     {
         // YENÝ EKLEDÝK: Yürüyüþ motorunu koda tanýtýyoruz ve durma mesafesini ayarlýyoruz.
@@ -28,6 +39,11 @@ public class BotErtu : MonoBehaviour
         StartCoroutine(AlanTaramaRutini());
     }
     void Update()
+    {
+        mesafeAyar();
+    }
+
+    private void mesafeAyar()
     {
         // Eðer radarýmýz bir hedef bulduysa
         if (mevcutHedef != null)
@@ -45,6 +61,8 @@ public class BotErtu : MonoBehaviour
 
                 // Sadece uzaktayken "Git" emri veriyoruz.
                 agent.SetDestination(mevcutHedef.position);
+                 animator.SetBool("Running", true);
+                
             }
             // 3. Vuruþ mesafesine GÝRDÝYSE, motoru durdur ve FREN YAP
             else
@@ -55,6 +73,7 @@ public class BotErtu : MonoBehaviour
 
                     // ÝÞTE SENÝN FÝKRÝN: Botun momentumunu (kaymasýný) anýnda kesiyoruz!
                     agent.velocity = Vector3.zero;
+                    animator.SetBool("Running", false);
                 }
 
                 // Hedef hareket ederse diye yüzümüzü düþmana doðru yumuþakça döndürüyoruz:
