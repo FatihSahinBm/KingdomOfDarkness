@@ -873,6 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 5
   rotationSpeed: 720
+  Can: 0
 --- !u!114 &952733583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,6 +1049,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   saldiriMesafesi: 1.5
+  saldiriAraligi: 2
+  sonSaldiriZamani: 0
 --- !u!54 &1274278511
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1816,6 +1819,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8832964881147904658, guid: c26e8c19d8cdac1479dfd6f1b18b3864, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1888163687}
+    - targetCorrespondingSourceObject: {fileID: 8832964881147904658, guid: c26e8c19d8cdac1479dfd6f1b18b3864, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1888163685}
   m_SourcePrefab: {fileID: 100100000, guid: c26e8c19d8cdac1479dfd6f1b18b3864, type: 3}
@@ -1847,6 +1853,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1888163687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538867927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d045ddc5dca0d645a6c3e5a31f68413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimasyonKoprusu
+  anaScript: {fileID: 1274278510}
 --- !u!1001 &1975791830
 PrefabInstance:
   m_ObjectHideFlags: 0

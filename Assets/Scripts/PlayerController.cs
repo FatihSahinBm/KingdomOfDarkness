@@ -11,7 +11,9 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector2 moveInput;
     private Vector3 moveDirection;
-    
+
+    [Header("Can")]
+    public float Can;
     private void Awake()
     {
         // Fizik iþlemleri için Rigidbody'yi alýyoruz
@@ -66,5 +68,10 @@ public class PlayerController : MonoBehaviour
             // Karakterin mevcut rotasyonundan hedef rotasyona yumuþak geçiþ yap
             rb.rotation = Quaternion.RotateTowards(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
         }
+    }
+
+    public void CanAzalt(float damage)
+    {
+        Can = Can - damage;
     }
 }

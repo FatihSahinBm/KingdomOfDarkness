@@ -13,6 +13,8 @@ public class BotErtu : MonoBehaviour
 
     [Header("Savaþ Ayarlarý")] // YENÝ EKLEDÝK: Düþmana ne kadar yaklaþacaðýný belirlemek için.
     public float saldiriMesafesi = 1.5f;
+    public float saldiriAraligi = 4f;
+    public float sonSaldiriZamani = 0f;
 
     // Botun þu an takip ettiði bir hedefin olup olmadýðýný tutar
     private Transform mevcutHedef;
@@ -85,6 +87,12 @@ public class BotErtu : MonoBehaviour
                     Quaternion hedefRotasyon = Quaternion.LookRotation(bakilacakYon);
                     transform.rotation = Quaternion.Slerp(transform.rotation, hedefRotasyon, Time.deltaTime * 5f);
                 }
+
+                if (Time.time >= sonSaldiriZamani + saldiriAraligi)
+                {
+                    animator.SetTrigger("Attack");
+                    sonSaldiriZamani = Time.time;
+                }
             }
         }
         else // Eðer hedef yoksa veya alandan çýktýysa
@@ -95,6 +103,22 @@ public class BotErtu : MonoBehaviour
                 agent.velocity = Vector3.zero; // Burada da fren yap
             }
         }
+    }
+
+
+    public void hasarVer()
+    {
+        if (mevcutHedef != null)
+        {
+            PlayerController playerController = mevcutHedef.GetComponentInParent<PlayerController>();
+
+            if (playerController != null)
+            {
+                playerController.CanAzalt(10); // Düþmanýn canýný 10 azalttýk
+                Debug.Log("Düþmana kýlýç deðdi, 10 hasar verildi!");
+            }
+        }
+        Debug.Log("fonksiyon çalýþýyor");
     }
 
     // --- SÜREKLÝ ÇALIÞAN RADAR SÝSTEMÝ ---
@@ -125,7 +149,7 @@ public class BotErtu : MonoBehaviour
             // ilk bulduðumuz düþmaný hedef olarak belirliyoruz.
             mevcutHedef = bulunanlar[0].transform;
 
-            Debug.Log("Düþman tespit edildi! Hedef: " + mevcutHedef.name);
+           // Debug.Log("Düþman tespit edildi! Hedef: " + mevcutHedef.name);
 
             // ÝLERÝDE BURAYA: mevcutDurum = BotDurumu.DusmanaSaldiriyor; yazacaðýz.
         }
